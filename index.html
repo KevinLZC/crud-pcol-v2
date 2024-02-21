@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="/js/inventory.js"></script>
+  <script src="/js/item.js"></script>
+  <title>PCOL Hardware - CRUD Inventory</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link href="https://fonts.cdnfonts.com/css/gg-sans-2" rel="stylesheet">
+</head>
+
+<body>
+  <div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+  </div>
+  <div class="container">
+    <h1>PCOL Hardware</h1>
+    <div class="content">
+      <div class="form-container">
+        <form id="itemForm">
+          <label for="Nombre">Nombre</label>
+          <input type="text" id="itemName" placeholder="Nombre" name="Nombre"><br>
+          <label for="Modelo">Modelo</label>
+          <input type="text" id="itemModel" placeholder="Modelo" name="Modelo"><br>
+          <label for="Marca">Marca</label>
+          <input type="text" id="itemBrand" placeholder="Marca" name="Marca"><br>
+          <label for="Precio">Precio</label>
+          <input type="text" id="itemPrice" placeholder="Precio" name="Precio"><br>
+          <button type="button" id="btnAdd" class="btn" name="">Agregar</button>
+          <button type="button" id="btnSave" class="btn" style="background-color: green;">Guardar</button>
+        </form>
+      </div>
+      <div class="table-container">
+        <table id="itemTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Modelo</th>
+              <th>Marca</th>
+              <th>Precio</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="itemTableBody">
+            <!-- Los elementos de la lista se agregarán aquí -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <script src="/js/app.js"></script>
+</body>
+
+</html>

@@ -110,3 +110,7 @@ function deleteItem(id) {
   inventory.deleteItem(id)
 }
 
+function setActive(id) {
+  let selection = document.getElementById(id)
+  selection.classList.add('active')
+}

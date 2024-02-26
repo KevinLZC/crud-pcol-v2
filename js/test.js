@@ -33,3 +33,16 @@ function navigateTo(id) {
     document.getElementById('managementContent').style.display = 'block'
   }
 }
+
+function register(action){
+  if(action === 'add'){
+    document.getElementById('itemForm').style.display = 'block'
+    document.getElementById('showForm').style.display = 'none'
+  } else if (action === 'cancel'){
+    document.getElementById('itemForm').style.display = 'none'
+    document.getElementById('btnAdd').style.display = 'block'
+    document.getElementById('btnSave').style.display = 'none'
+    document.getElementById('showForm').style.display = 'block'
+    cleanInputs()
+  }
+}

@@ -17,7 +17,7 @@ body {
 }
 
 header {
-  padding: 11px 0;
+  padding: 5px 0;
   text-align: center;
   width: 100%;
 }
@@ -79,10 +79,8 @@ a:hover {
 
 footer {
   background-color: #066699;
-  padding: 20px 0;
+  padding: 10px 0;
   text-align: center;
-  position: fixed;
-  bottom: 0;
   width: 100%;
 }
 
@@ -104,7 +102,7 @@ th,
 td {
   border-bottom: 1px solid #02416d;
   padding: 8px;
-  text-align: left;
+  text-align: center;
 }
 
 .sidebar {
@@ -116,13 +114,43 @@ td {
   flex: 1;
 }
 
+.btnActions {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}
+
+.btnActions button {
+  margin: 5px;
+}
+
+.btnUpdate .btnDelete a {
+  padding: 0;
+}
+
+.btnTable {
+  display: flex;
+}
+
 .content {
+  display: flex;
   background-color: #f8f8ec;
   border: 1px solid transparent;
   border-radius: 10px;
   margin: 10px 10px 10px 5px;
   padding: 20px;
   flex: 5;
+  overflow: scroll;
+}
+
+.content .cardContainer {
+  display: inline-block;
+}
+
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .active {
@@ -137,8 +165,7 @@ td {
 }
 
 .homeStyle img {
-  width: 40%;
-  height: auto;
+  width: 30%;
   border-radius: 10px;
 }
 

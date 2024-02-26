@@ -26,15 +26,22 @@ btnAddItem.addEventListener('click', () => {
     inventory.addNewItem(newItem)
     addItemTable(newItem)
     cleanInputs()
+    document.getElementById('itemForm').style.display = 'none'
+    document.getElementById('showForm').style.display = 'block'
   }
 })
 
 let btnSaveItem = document.getElementById('btnSave')
 btnSaveItem.addEventListener('click', () => {
-  let itemId = items.find(item => item.getName === document.getElementById('itemName').value).getId
+  let itemId = items.find(item => item.getId === document.getElementById('itemId').value).getId
   saveItem(itemId)
   cleanInputs()
   renderItems()
+
+  document.getElementById('itemForm').style.display = 'none'
+  document.getElementById('showForm').style.display = 'block'
+  document.getElementById('btnAdd').style.display = 'block'
+  document.getElementById('btnSave').style.display = 'none'
 })
 
 function cleanInputs() {
@@ -61,15 +68,18 @@ function addItemTable(item) {
       <td>${item.getName}</td>
       <td>${item.getModel}</td>
       <td>${item.getBrand}</td>
-      <td>${item.getPrice}</td>
+      <td>$${item.getPrice}</td>
       <td>
-        <a onclick="setInputItem('${item.getId}')"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="#ea580c" d="M5 19h1.425L16.2 9.225L14.775 7.8L5 17.575zm-2 2v-4.25L16.2 3.575q.3-.275.663-.425t.762-.15q.4 0 .775.15t.65.45L20.425 5q.3.275.438.65T21 6.4q0 .4-.137.763t-.438.662L7.25 21zM19 6.4L17.6 5zm-3.525 2.125l-.7-.725L16.2 9.225z"/></svg></a>
-        <a onclick="deleteItem('${item.getId}')"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="#dc2626" d="m9.4 16.5l2.6-2.6l2.6 2.6l1.4-1.4l-2.6-2.6L16 9.9l-1.4-1.4l-2.6 2.6l-2.6-2.6L8 9.9l2.6 2.6L8 15.1zM7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21z"/></svg></a>
+        <div class="btnTable">
+          <a class="btnUpdate" onclick="setInputItem('${item.getId}')"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="#ea580c" d="M5 19h1.425L16.2 9.225L14.775 7.8L5 17.575zm-2 2v-4.25L16.2 3.575q.3-.275.663-.425t.762-.15q.4 0 .775.15t.65.45L20.425 5q.3.275.438.65T21 6.4q0 .4-.137.763t-.438.662L7.25 21zM19 6.4L17.6 5zm-3.525 2.125l-.7-.725L16.2 9.225z"/></svg></a>
+          <a class="btnDelete" onclick="deleteItem('${item.getId}')"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="#dc2626" d="m9.4 16.5l2.6-2.6l2.6 2.6l1.4-1.4l-2.6-2.6L16 9.9l-1.4-1.4l-2.6 2.6l-2.6-2.6L8 9.9l2.6 2.6L8 15.1zM7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21z"/></svg></a>
+        </div
       </td>
     </tr>`
 }
 
 function setInputItem(id) {
+  let itemId = document.getElementById('itemId')
   let itemName = document.getElementById('itemName')
   let itemModel = document.getElementById('itemModel')
   let itemBrand = document.getElementById('itemBrand')
@@ -77,12 +87,18 @@ function setInputItem(id) {
 
   items.map(item => {
     if (item.getId === id) {
+      itemId.value = item.getId
       itemName.value = item.getName
       itemModel.value = item.getModel
       itemBrand.value = item.getBrand
       itemPrice.value = item.getPrice
     }
   })
+
+  document.getElementById('btnAdd').style.display = 'none'
+  document.getElementById('btnSave').style.display = 'block'
+  document.getElementById('itemForm').style.display = 'block'
+  document.getElementById('showForm').style.display = 'none'
 }
 
 function saveItem(id) {
@@ -108,9 +124,4 @@ function deleteItem(id) {
   let itemTable = document.getElementById(id)
   itemTable.remove()
   inventory.deleteItem(id)
-}
-
-function setActive(id) {
-  let selection = document.getElementById(id)
-  selection.classList.add('active')
 }

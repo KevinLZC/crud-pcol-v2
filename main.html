@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="./css/styleNew.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script src="/js/inventory.js"></script>
+  <script src="/js/item.js"></script>
   <link
     href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
     rel="stylesheet">
@@ -42,7 +44,7 @@
         <img src="./assets/PCOL.jpg" alt="PCOL">
         <h3>Hardware & Más</h3>
       </div>
-      <div id="catalogueContent" class="catalogueStyle" style="display: none;">
+      <div id="catalogueContent" class="catalogueStyle" style="display: none; width: 100%;">
         <h2>Catálogo</h2>
         <div class="itemContainer">
           <div class="cardContainer">
@@ -51,12 +53,67 @@
             <p>Modelo</p>
             <p>Precio</p>
           </div>
+          <div class="cardContainer">
+            <h3>Nombre del producto</h3>
+            <p>Marca</p>
+            <p>Modelo</p>
+            <p>Precio</p>
+          </div>
+          <div class="cardContainer">
+            <h3>Nombre del producto</h3>
+            <p>Marca</p>
+            <p>Modelo</p>
+            <p>Precio</p>
+          </div>
+          <div class="cardContainer">
+            <h3>Nombre del producto</h3>
+            <p>Marca</p>
+            <p>Modelo</p>
+            <p>Precio</p>
+          </div>
+          <div class="cardContainer">
+            <h3>Nombre del producto</h3>
+            <p>Marca</p>
+            <p>Modelo</p>
+            <p>Precio</p>
+          </div>
+          <div class="cardContainer">
+            <h3>Nombre del producto</h3>
+            <p>Marca</p>
+            <p>Modelo</p>
+            <p>Precio</p>
+          </div>
+          <div class="cardContainer">
+            <h3>Nombre del producto</h3>
+            <p>Marca</p>
+            <p>Modelo</p>
+            <p>Precio</p>
+          </div>
+          <div class="cardContainer">
+            <h3>Nombre del producto</h3>
+            <p>Marca</p>
+            <p>Modelo</p>
+            <p>Precio</p>
+          </div>
+          <div class="cardContainer">
+            <h3>Nombre del producto</h3>
+            <p>Marca</p>
+            <p>Modelo</p>
+            <p>Precio</p>
+          </div>
+          <div class="cardContainer">
+            <h3>Nombre del producto</h3>
+            <p>Marca</p>
+            <p>Modelo</p>
+            <p>Precio</p>
+          </div>
         </div>
       </div>
-      <div id="managementContent" style="display: none;">
+      <div id="managementContent" style="display: none; width: 100%;">
         <h2>Gestión de Inventario</h2>
         <div class="formContainer">
-          <form id="itemForm">
+          <form id="itemForm" style="display: none;">
+            <input type="text" id="itemId" placeholder="Id" name="Id" style="display: none;"><br>
             <label for="itemName">Nombre</label>
             <input type="text" id="itemName" placeholder="Nombre" name="Nombre">
             <label for="itemModel">Modelo</label>
@@ -64,10 +121,14 @@
             <label for="itemBrand">Marca</label>
             <input type="text" id="itemBrand" placeholder="Marca" name="Marca">
             <label for="itemPrice">Precio</label>
-            <input type="text" id="itemPrice" placeholder="Precio" name="Precio">
-            <button type="button" id="btnAdd" class="btn" name="">Agregar</button>
-            <button type="button" id="btnSave" class="btn" style="background-color: green;">Guardar</button>
+            <input type="number" id="itemPrice" placeholder="Precio" name="Precio" min="0"><br>
+            <div class="btnActions">
+              <button type="button" id="btnAdd" class="btn" style="background-color: green;">Agregar</button>
+              <button type="button" id="btnSave" class="btn" style="display: none; background-color: green;">Guardar</button>
+              <button type="button" id="btnCancel" class="btn" onclick="register('cancel')" style="background-color: red;">Cancelar</button>
+            </div>
           </form>
+          <button type="button" id="showForm" class="btn" onclick="register('add')">Agregar</button>
         </div>
         <table id="itemTable">
           <thead>
@@ -82,14 +143,6 @@
           </thead>
           <tbody id="itemTableBody">
             <!-- Los elementos de la lista se agregarán aquí -->
-            <tr>
-              <th>ID</th>
-              <th>NOMBRE</th>
-              <th>MODELO</th>
-              <th>MARCA</th>
-              <th>PRECIO</th>
-              <th></th>
-            </tr>
           </tbody>
         </table>
       </div>
@@ -100,6 +153,7 @@
   </footer>
   <!--<script src="/js/app.js"></script>-->
   <script src="/js/test.js"></script>
+  <script src="/js/app.js"></script>
 </body>
 
 </html>

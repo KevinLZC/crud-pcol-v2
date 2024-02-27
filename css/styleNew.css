@@ -143,14 +143,32 @@ td {
   overflow: scroll;
 }
 
-.content .cardContainer {
-  display: inline-block;
+.itemContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
 }
 
 .cardContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  background-color: lightgray;
+  padding: 20px;
+  text-align: center;
+  width: calc(33.33% - 20px);
+  margin-right: 20px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1024px) {
+  .cardContainer {
+    width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 768px) {
+  .cardContainer {
+    width: calc(100% - 20px);
+  }
 }
 
 .active {

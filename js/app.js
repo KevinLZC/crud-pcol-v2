@@ -1,12 +1,15 @@
 let inventory = new Inventory()
 let items = inventory.getInventory
 let itemTable = document.getElementById('itemTableBody')
+let itemContainer = document.querySelector('.itemContainer')
 renderItems()
 
 function renderItems() {
   itemTable.innerHTML = ''
+  itemContainer.innerHTML = ''
   items.forEach(item => {
     addItemTable(item)
+    addItemCatalogue(item)
   })
 }
 
@@ -25,6 +28,7 @@ btnAddItem.addEventListener('click', () => {
     let newItem = new Item(itemId, itemName, itemModel, itemBrand, itemPrice)
     inventory.addNewItem(newItem)
     addItemTable(newItem)
+    addItemCatalogue(newItem)
     cleanInputs()
     document.getElementById('itemForm').style.display = 'none'
     document.getElementById('showForm').style.display = 'block'
@@ -79,6 +83,16 @@ function addItemTable(item) {
         </div
       </td>
     </tr>`
+}
+
+function addItemCatalogue(item){
+  itemContainer.innerHTML +=
+  `<div id="${item.getId}" class="cardContainer">
+    <h3>${item.getName}</h3>
+    <p>${item.getModel}</p>
+    <p>${item.getBrand}</p>
+    <p>${item.getPrice}</p>
+  </div>`
 }
 
 function setInputItem(id) {
@@ -158,6 +172,8 @@ function btnModalAccept(element){
   dialog.close();
   register('delete')
   id = element.className
+  let itemDiv = document.getElementById(id);
+  itemDiv.remove();
   let itemTable = document.getElementById(id)
   itemTable.remove()
   inventory.deleteItem(id)

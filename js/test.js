@@ -44,5 +44,11 @@ function register(action){
     document.getElementById('btnSave').style.display = 'none'
     document.getElementById('showForm').style.display = 'block'
     cleanInputs()
+  } else if(action === 'delete'){
+    document.getElementById('itemForm').style.display = 'none'
+    document.getElementById('btnAdd').style.display = 'block'
+    document.getElementById('btnSave').style.display = 'none'
+    document.getElementById('showForm').style.display = 'block'
+    cleanInputs()
   }
 }

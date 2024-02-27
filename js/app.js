@@ -28,6 +28,9 @@ btnAddItem.addEventListener('click', () => {
     cleanInputs()
     document.getElementById('itemForm').style.display = 'none'
     document.getElementById('showForm').style.display = 'block'
+
+    let dialogAdd = document.getElementById('dialogAdd')
+    dialogShow('add', dialogAdd, itemId,);
   }
 })
 
@@ -108,20 +111,59 @@ function saveItem(id) {
       let itemModel = document.getElementById('itemModel').value
       let itemBrand = document.getElementById('itemBrand').value
       let itemPrice = document.getElementById('itemPrice').value
-      console.log(item)
 
       item.setName = itemName
       item.setModel = itemModel
       item.setBrand = itemBrand
       item.setPrice = itemPrice
 
-      window.alert(`Se modificó el producto con ID ${id} de forma correcta`)
+      dialogSave = document.getElementById('dialogSave')
+      dialogShow('save', dialogSave, id,);
     }
   })
 }
 
 function deleteItem(id) {
+  dialogDelete = document.getElementById('dialogDelete')
+  dialogShow('delete', dialogDelete, id,)
+}
+
+function dialogShow(action, dialog, id){
+  if(action === "save"){
+    dialogContenido = document.getElementById('dialogSaveContent')
+    dialogContenido.className =
+    dialogContenido.textContent = `Se modificó el producto con ID "${id}" de forma correcta`
+    dialog.showModal();
+    setTimeout(function(){
+      dialog.close();
+    }, 3000)
+  } else if(action === "add"){
+    dialogContenido = document.getElementById('dialogAddContent')
+    dialogContenido.textContent = `Se agregó el producto con ID "${id}" de forma correcta`
+    dialog.showModal();
+    setTimeout(function(){
+      dialog.close();
+    }, 3000)
+  } else if(action === "delete"){
+    dialogContenido = document.getElementById('dialogDeleteContent')
+    dialogContenido.textContent = `Se eliminará el producto con ID "${id}" ¿Estás seguro?`
+    dialog.showModal();
+    setClass = document.getElementById('btnModalAccept')
+    setClass.className = id
+  }
+}
+
+function btnModalAccept(element){
+  dialog = document.getElementById('dialogDelete')
+  dialog.close();
+  register('delete')
+  id = element.className
   let itemTable = document.getElementById(id)
   itemTable.remove()
   inventory.deleteItem(id)
+}
+
+function btnModalCancel(){
+  dialog = document.getElementById('dialogDelete')
+  dialog.close();
 }

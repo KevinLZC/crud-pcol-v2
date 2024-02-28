@@ -15,7 +15,7 @@ body {
   margin: 0;
   padding: 0;
   font-size: 16px;
-  }
+}
 
 header {
   padding: 5px 0;
@@ -70,12 +70,27 @@ a {
   width: 92%;
   text-decoration: none;
   color: #fff;
+  cursor: pointer;
 }
 
 a:hover {
   background-color: #066699;
   font-weight: 600;
   font-style: normal;
+}
+
+button {
+  background-color: #02416d;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  color: #fff;
+  padding: 3px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
 }
 
 footer {
@@ -106,6 +121,16 @@ td {
   text-align: center;
 }
 
+label {
+  padding: 10px;
+}
+
+.inputForm {
+  border: none;
+  border: 1px solid transparent;
+  border-radius: 10px;
+}
+
 .sidebar {
   background-color: #02416d;
   border: 1px solid transparent;
@@ -122,7 +147,7 @@ td {
 }
 
 .btnActions button {
-  margin: 5px;
+  margin: 15px;
 }
 
 .btnUpdate .btnDelete a {
@@ -160,6 +185,14 @@ td {
   margin-right: 20px;
   margin-bottom: 20px;
   box-sizing: border-box;
+  border-radius: 15px;
+}
+
+.cardContainer h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-style: normal;
+  color: #02416d;
 }
 
 @media (max-width: 1024px) {
@@ -198,11 +231,32 @@ td {
   text-align: center;
 }
 
+#itemTableBody a:hover {
+  background-color: lightgray;
+}
+
+#itemForm {
+  background-color: rgb(238, 238, 238);
+  padding: 0 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  display: flex;
+  gap: 10px;
+}
+
 .dialog {
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); 
+  left: 60%;
+  transform: translate(-50%, -75%);
   background-color: white;
   border: 1px solid black;
   padding: 20px;
+  border-radius: 15px;
+}
+
+.btnDialog {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }

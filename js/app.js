@@ -15,15 +15,15 @@ function renderItems() {
 
 let btnAddItem = document.getElementById('btnAdd')
 btnAddItem.addEventListener('click', () => {
-  
+
   let itemName = document.getElementById('itemName').value
   let itemModel = document.getElementById('itemModel').value
   let itemBrand = document.getElementById('itemBrand').value
   let itemPrice = document.getElementById('itemPrice').value
 
-  if(itemName == "" || itemModel == "" || itemBrand == "" || itemPrice == ""){
+  if (itemName == "" || itemModel == "" || itemBrand == "" || itemPrice == "") {
     window.alert("Faltan campos por llenar")
-  }else{
+  } else {
     let itemId = generarId(6)
     let newItem = new Item(itemId, itemName, itemModel, itemBrand, itemPrice)
     inventory.addNewItem(newItem)
@@ -85,13 +85,13 @@ function addItemTable(item) {
     </tr>`
 }
 
-function addItemCatalogue(item){
+function addItemCatalogue(item) {
   itemContainer.innerHTML +=
-  `<div id="${item.getId}" class="cardContainer">
+    `<div id="${item.getId}" class="cardContainer">
     <h3>${item.getName}</h3>
     <p>${item.getModel}</p>
     <p>${item.getBrand}</p>
-    <p>${item.getPrice}</p>
+    <p>$${item.getPrice}</p>
   </div>`
 }
 
@@ -126,13 +126,19 @@ function saveItem(id) {
       let itemBrand = document.getElementById('itemBrand').value
       let itemPrice = document.getElementById('itemPrice').value
 
-      item.setName = itemName
-      item.setModel = itemModel
-      item.setBrand = itemBrand
-      item.setPrice = itemPrice
+      if (itemName == "" || itemModel == "" || itemBrand == "" || itemPrice == "") {
+        window.alert("Faltan campos por llenar")
+      } else {
+        item.setName = itemName
+        item.setModel = itemModel
+        item.setBrand = itemBrand
+        item.setPrice = itemPrice
 
-      dialogSave = document.getElementById('dialogSave')
-      dialogShow('save', dialogSave, id,);
+        dialogSave = document.getElementById('dialogSave')
+        dialogShow('save', dialogSave, id,);
+      }
+
+
     }
   })
 }
@@ -142,23 +148,23 @@ function deleteItem(id) {
   dialogShow('delete', dialogDelete, id,)
 }
 
-function dialogShow(action, dialog, id){
-  if(action === "save"){
+function dialogShow(action, dialog, id) {
+  if (action === "save") {
     dialogContenido = document.getElementById('dialogSaveContent')
     dialogContenido.className =
-    dialogContenido.textContent = `Se modificó el producto con ID "${id}" de forma correcta`
+      dialogContenido.textContent = `Se modificó el producto con ID "${id}" de forma correcta`
     dialog.showModal();
-    setTimeout(function(){
+    setTimeout(function () {
       dialog.close();
     }, 3000)
-  } else if(action === "add"){
+  } else if (action === "add") {
     dialogContenido = document.getElementById('dialogAddContent')
     dialogContenido.textContent = `Se agregó el producto con ID "${id}" de forma correcta`
     dialog.showModal();
-    setTimeout(function(){
+    setTimeout(function () {
       dialog.close();
     }, 3000)
-  } else if(action === "delete"){
+  } else if (action === "delete") {
     dialogContenido = document.getElementById('dialogDeleteContent')
     dialogContenido.textContent = `Se eliminará el producto con ID "${id}" ¿Estás seguro?`
     dialog.showModal();
@@ -167,7 +173,7 @@ function dialogShow(action, dialog, id){
   }
 }
 
-function btnModalAccept(element){
+function btnModalAccept(element) {
   dialog = document.getElementById('dialogDelete')
   dialog.close();
   register('delete')
@@ -179,7 +185,62 @@ function btnModalAccept(element){
   inventory.deleteItem(id)
 }
 
-function btnModalCancel(){
+function btnModalCancel() {
   dialog = document.getElementById('dialogDelete')
   dialog.close();
+}
+
+function setActive(id) {
+  let selection = document.getElementById(id)
+  if (id === 'home') {
+    selection.classList.add('active')
+    document.getElementById('catalogue').classList.remove('active')
+    document.getElementById('management').classList.remove('active')
+  } else if (id === 'catalogue') {
+    selection.classList.add('active')
+    document.getElementById('home').classList.remove('active')
+    document.getElementById('management').classList.remove('active')
+  } else if (id === 'management') {
+    selection.classList.add('active')
+    document.getElementById('home').classList.remove('active')
+    document.getElementById('catalogue').classList.remove('active')
+  }
+}
+
+function navigateTo(id) {
+  if (id === 'home') {
+    setActive('home')
+    document.getElementById('catalogueContent').style.display = 'none'
+    document.getElementById('managementContent').style.display = 'none'
+    document.getElementById('homeContent').style.display = 'block'
+  } else if (id === 'catalogue') {
+    setActive('catalogue')
+    document.getElementById('homeContent').style.display = 'none'
+    document.getElementById('managementContent').style.display = 'none'
+    document.getElementById('catalogueContent').style.display = 'block'
+  } else if (id === 'management') {
+    setActive('management')
+    document.getElementById('homeContent').style.display = 'none'
+    document.getElementById('catalogueContent').style.display = 'none'
+    document.getElementById('managementContent').style.display = 'block'
+  }
+}
+
+function register(action) {
+  if (action === 'add') {
+    document.getElementById('itemForm').style.display = 'block'
+    document.getElementById('showForm').style.display = 'none'
+  } else if (action === 'cancel') {
+    document.getElementById('itemForm').style.display = 'none'
+    document.getElementById('btnAdd').style.display = 'block'
+    document.getElementById('btnSave').style.display = 'none'
+    document.getElementById('showForm').style.display = 'block'
+    cleanInputs()
+  } else if (action === 'delete') {
+    document.getElementById('itemForm').style.display = 'none'
+    document.getElementById('btnAdd').style.display = 'block'
+    document.getElementById('btnSave').style.display = 'none'
+    document.getElementById('showForm').style.display = 'block'
+    cleanInputs()
+  }
 }

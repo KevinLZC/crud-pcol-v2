@@ -13,19 +13,69 @@ function renderItems() {
   })
 }
 
+function unchecked(checked) {
+  if (checked === 'agotado') {
+    document.getElementById('itemDisponible').checked = false
+    document.getElementById('itemStock').checked = false
+  } else if (checked === 'disponible') {
+    document.getElementById('itemAgotado').checked = false
+    document.getElementById('itemStock').checked = false
+  } else if (checked === 'stock') {
+    document.getElementById('itemAgotado').checked = false
+    document.getElementById('itemDisponible').checked = false
+  }
+}
+
 let btnAddItem = document.getElementById('btnAdd')
 btnAddItem.addEventListener('click', () => {
+
+  let itemAvailability = ''
+  let itemHigh = ''
+  let itemCondition = ''
 
   let itemName = document.getElementById('itemName').value
   let itemModel = document.getElementById('itemModel').value
   let itemBrand = document.getElementById('itemBrand').value
   let itemPrice = document.getElementById('itemPrice').value
+  let itemAgotado = document.getElementById('itemAgotado').checked
+  let itemDisponible = document.getElementById('itemDisponible').checked
+  let itemSelected = document.getElementById('itemSelected').value
+  let itemNuevo = document.getElementById('itemNuevo').checked
+  let itemUsado = document.getElementById('itemUsado').checked
+  let itemReparado = document.getElementById('itemReparado').checked
+
+
+  if (itemAgotado) {
+    itemAvailability = 'Agotado'
+  } else if (itemDisponible) {
+    itemAvailability = 'Disponible'
+  } else if (itemStock) {
+    itemAvailability = 'Stock'
+  }
+
+  if (itemSelected === 'Low') {
+    itemHigh = 'Baja'
+  } else if (itemSelected === 'Media') {
+    itemHigh = 'Media'
+  } else if (itemSelected === 'High') {
+    itemHigh = 'Alta'
+  }
+
+  if (itemNuevo) {
+    itemCondition = 'Nuevo'
+  } else if (itemUsado) {
+    itemCondition = 'Usado'
+  } else if (itemReparado) {
+    itemCondition = 'Reparado'
+  }
+
 
   if (itemName == "" || itemModel == "" || itemBrand == "" || itemPrice == "") {
     window.alert("Faltan campos por llenar")
   } else {
     let itemId = generarId(6)
-    let newItem = new Item(itemId, itemName, itemModel, itemBrand, itemPrice)
+    let newItem = new Item(itemId, itemName, itemModel, itemBrand, itemPrice, itemAvailability, itemHigh, itemCondition)
+    console.log(newItem)
     inventory.addNewItem(newItem)
     addItemTable(newItem)
     addItemCatalogue(newItem)
@@ -56,6 +106,12 @@ function cleanInputs() {
   document.getElementById('itemModel').value = ''
   document.getElementById('itemBrand').value = ''
   document.getElementById('itemPrice').value = ''
+  document.getElementById('itemAgotado').checked = false
+  document.getElementById('itemDisponible').checked = false
+  document.getElementById('itemStock').checked = false
+  document.getElementById('itemNuevo').checked = false
+  document.getElementById('itemUsado').checked = false
+  document.getElementById('itemReparado').checked = false
 }
 
 function generarId(longitud) {
@@ -76,6 +132,9 @@ function addItemTable(item) {
       <td>${item.getModel}</td>
       <td>${item.getBrand}</td>
       <td>$${item.getPrice}</td>
+      <td>${item.getAvailability}</td>
+      <td>${item.getHigh}</td>
+      <td>${item.getCondition}</td>
       <td>
         <div class="btnTable">
           <a class="btnUpdate" onclick="setInputItem('${item.getId}')"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="#ea580c" d="M5 19h1.425L16.2 9.225L14.775 7.8L5 17.575zm-2 2v-4.25L16.2 3.575q.3-.275.663-.425t.762-.15q.4 0 .775.15t.65.45L20.425 5q.3.275.438.65T21 6.4q0 .4-.137.763t-.438.662L7.25 21zM19 6.4L17.6 5zm-3.525 2.125l-.7-.725L16.2 9.225z"/></svg></a>
@@ -92,6 +151,9 @@ function addItemCatalogue(item) {
     <p>${item.getModel}</p>
     <p>${item.getBrand}</p>
     <p>$${item.getPrice}</p>
+    <p>${item.getAvailability}</p>
+    <p>${item.getHigh}</p>
+    <p>${item.getCondition}</p>
   </div>`
 }
 
@@ -101,6 +163,15 @@ function setInputItem(id) {
   let itemModel = document.getElementById('itemModel')
   let itemBrand = document.getElementById('itemBrand')
   let itemPrice = document.getElementById('itemPrice')
+  let itemAgotado = document.getElementById('itemAgotado')
+  let itemDisponible = document.getElementById('itemDisponible')
+  let itemStock = document.getElementById('itemStock')
+  let itemBaja = document.getElementById('itemBaja')
+  let itemMedia = document.getElementById('itemMedia')
+  let itemAlta = document.getElementById('itemAlta')
+  let itemNuevo = document.getElementById('itemNuevo')
+  let itemUsado = document.getElementById('itemUsado')
+  let itemReparado = document.getElementById('itemReparado')
 
   items.map(item => {
     if (item.getId === id) {
@@ -109,6 +180,27 @@ function setInputItem(id) {
       itemModel.value = item.getModel
       itemBrand.value = item.getBrand
       itemPrice.value = item.getPrice
+      if (item.getAvailability === 'Agotado') {
+        itemAgotado.checked = true
+      } else if (item.getAvailability === 'Disponible') {
+        itemDisponible.checked = true
+      } else if (item.getAvailability === 'Stock') {
+        itemStock.checked = true
+      }
+      if (item.getHigh === 'Baja') {
+        itemBaja.checked = true
+      } else if (item.getHigh === 'Media') {
+        itemMedia.checked = true
+      } else if (item.getHigh === 'Alta') {
+        itemAlta.checked = true
+      }
+      if (item.getCondition === 'Nuevo') {
+        itemNuevo.checked = true
+      } else if (item.getCondition === 'Usado') {
+        itemUsado.checked = true
+      } else if (item.getCondition === 'Reparado') {
+        itemReparado.checked = true
+      }
     }
   })
 
@@ -125,7 +217,15 @@ function saveItem(id) {
       let itemModel = document.getElementById('itemModel').value
       let itemBrand = document.getElementById('itemBrand').value
       let itemPrice = document.getElementById('itemPrice').value
+      let itemAgotado = document.getElementById('itemAgotado').checked
+      let itemDisponible = document.getElementById('itemDisponible').checked
+      let itemStock = document.getElementById('itemStock').checked
+      let itemSelected = document.getElementById('itemSelected').value
+      let itemNuevo = document.getElementById('itemNuevo').checked
+      let itemUsado = document.getElementById('itemUsado').checked
+      let itemReparado = document.getElementById('itemReparado').checked
 
+      console.log(itemSelected)
       if (itemName == "" || itemModel == "" || itemBrand == "" || itemPrice == "") {
         window.alert("Faltan campos por llenar")
       } else {
@@ -133,6 +233,27 @@ function saveItem(id) {
         item.setModel = itemModel
         item.setBrand = itemBrand
         item.setPrice = itemPrice
+        if (itemAgotado) {
+          item.setAvailability = 'Agotado'
+        } else if (itemDisponible) {
+          item.setAvailability = 'Disponible'
+        } else if (itemStock) {
+          item.setAvailability = 'Stock'
+        }
+        if (itemSelected === 'Low') {
+          item.setHigh = 'Baja'
+        } else if (itemSelected === 'Media') {
+          item.setHigh = 'Media'
+        } else if (itemSelected === 'High') {
+          item.setHigh = 'Alta'
+        }
+        if (itemNuevo) {
+          item.setCondition = 'Nuevo'
+        } else if (itemUsado) {
+          item.setCondition = 'Usado'
+        } else if (itemReparado) {
+          item.setCondition = 'Reparado'
+        }
 
         dialogSave = document.getElementById('dialogSave')
         dialogShow('save', dialogSave, id,);

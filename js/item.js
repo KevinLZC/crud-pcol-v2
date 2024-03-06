@@ -1,10 +1,13 @@
 class Item {
-  constructor(id, name, model, brand, price) {
+  constructor(id, name, model, brand, price, availability, high, condition) {
     this.id = id
     this.name = name
     this.model = model
     this.brand = brand
     this.price = price
+    this.availability = availability
+    this.high = high
+    this.condition = condition
   }
 
   // Getters
@@ -24,6 +27,18 @@ class Item {
     return this.price
   }
 
+  get getAvailability() {
+    return this.availability
+  }
+
+  get getHigh() {
+    return this.high
+  }
+
+  get getCondition() {
+    return this.condition
+  }
+
   // Setters
   set setName(name) {
     this.name = name
@@ -36,5 +51,17 @@ class Item {
   }
   set setPrice(price) {
     this.price = price
+  }
+
+  set setAvailability(availability) {
+    this.availability = availability
+  }
+
+  set setHigh(high) {
+    this.high = high
+  }
+
+  set setCondition(condition) {
+    this.condition = condition
   }
 }

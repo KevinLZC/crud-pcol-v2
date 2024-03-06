@@ -62,7 +62,27 @@
             <label for="itemBrand">Marca</label>
             <input type="text" id="itemBrand" placeholder="Marca" class="inputForm" name="Marca">
             <label for="itemPrice">Precio</label>
-            <input type="number" id="itemPrice" placeholder="1234" class="inputForm" name="Precio" min="0">
+            <input type="number" id="itemPrice" placeholder="1234" class="inputForm" name="Precio" min="0"> <br>
+            <div id="checkBoxForm">
+              <input type="checkbox" id="itemAgotado" class="inputForm" onclick="unchecked('agotado')"
+                name="Agotado">Agotado</input>
+              <input type="checkbox" id="itemDisponible" class="inputForm" onclick="unchecked('disponible')"
+                name="Disponible">Disponible</input>
+              <input type="checkbox" id="itemStock" class="inputForm" onclick="unchecked('stock')" name="En Stock">En
+              Stock</c>
+            </div>
+            <div id="selectBoxForm">
+              <select id="itemSelected">
+                <option id="itemBaja" value="Low">Gama Baja</option>
+                <option id="itemMedia" value="Media">Gama Media</option>
+                <option id="itemAlta" value="High">Gama Alta</option>
+              </select>
+            </div>
+            <div id="radioBoxForm">
+              <input type="radio" id="itemNuevo" class="inputForm" name="Condicion" value="Nuevo">Nuevo</input>
+              <input type="radio" id="itemUsado" class="inputForm" name="Condicion" value="Usado">Usado</input>
+              <input type="radio" id="itemReparado" class="inputForm" name="Condicion" value="Reparado">Reparado</input>
+            </div>
             <div class="btnActions">
               <button type="button" id="btnAdd" class="btn" style="background-color: green;">Agregar</button>
               <button type="button" id="btnSave" class="btn"
@@ -83,6 +103,9 @@
               <th>MODELO</th>
               <th>MARCA</th>
               <th>PRECIO</th>
+              <th>DISPONIBILIDAD</th>
+              <th>CONDICIÓN</th>
+              <th>GAMA</th>
               <th></th>
             </tr>
           </thead>
